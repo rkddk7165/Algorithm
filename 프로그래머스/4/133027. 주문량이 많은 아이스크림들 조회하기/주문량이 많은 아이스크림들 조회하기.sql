@@ -1,18 +1,11 @@
-select FLAVOR from (
-select FLAVOR, SUM(TOTAL_ORDER) as total_sum
-from
+select fh.FLAVOR
+from FIRST_HALF fh
+left join
 (
-    select FLAVOR, TOTAL_ORDER
-    from FIRST_HALF f
-
-UNION ALL
-
-    select FLAVOR, SUM(TOTAL_ORDER) as TOTAL_ORDER
-    from JULY j
+    select FLAVOR, SUM(TOTAL_ORDER) as s
+    from JULY 
     group by FLAVOR
-) d
-    
-group by FLAVOR
-order by total_sum desc
-    ) dddd
-    limit 3
+) j
+on fh.FLAVOR = j.FLAVOR
+order by (fh. TOTAL_ORDER + j.s) desc
+limit 3
