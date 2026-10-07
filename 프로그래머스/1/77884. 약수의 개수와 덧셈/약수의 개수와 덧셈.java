@@ -1,13 +1,11 @@
 class Solution {
     public int solution(int left, int right) {
         int result = 0;
-        int length = right - left;
-        for (int i = 0; i <= length; i++){
-            if(isEven(left)){
-                result += left;
+        for (int i = left; i <= right; i++){
+            if(isEven(i)){
+                result += i;
             }
-            else result -= left;
-            left++;
+            else result -= i;
         }
         return result;
     }
