@@ -1,24 +1,23 @@
 class Solution {
     static int result = 0;
-    
     public int solution(int[] numbers, int target) {
         
-        dfs(numbers, target, 0, 0);
+        dfs(0, numbers, 0, target);
         
         return result;
     }
     
-    public static void dfs(int[]numbers, int target, int sum, int count){
-        if (count == numbers.length){
-            if (sum == target) {
+    private static void dfs(int sum, int[] numbers, int count, int target){
+        if(count == numbers.length){
+            if(sum == target) {
                 result++;
+                return;
             }
             return;
         }
         
-        dfs(numbers, target, sum + numbers[count], count + 1);
-        dfs(numbers, target, sum - numbers[count], count + 1);
+        dfs(sum + numbers[count], numbers, ++count, target);
         
-        
+        dfs(sum - numbers[--count], numbers, ++count, target);
     }
 }
